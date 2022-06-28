@@ -15,12 +15,16 @@ console.log(`Your name is ${Fname} ${Lname}`); //when outputting a template stri
 
 //using flag variables (a varible type that has one value until some conditions are true)
 
-const grab = flag =>{
+const grab = flag => {
     let indexAfterFlag = process.argv.indexOf(flag) + 1; //index start from 0
     return process.argv[indexAfterFlag];
 }
 
 const greeting = grab("--greeting"); // flag variable is defined
-const user  = grap("--user");
+const user  = grab("--user");
+// when the --greeting is used on cmd and put a name after it it'll that name as varible to gretting variable
+//same goes to user, when --user keyword(defined with the grab function) uses in cmd and put a value after that, it'll assign that value to user varible
+//you can replace whatever keyword I want inside the grab function and value I put after that keyword will always assign to realted variable
+
 
 console.log(`${greeting} ${user}`);
