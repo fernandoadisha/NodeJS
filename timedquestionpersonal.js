@@ -24,7 +24,7 @@ let uanswers = [];
 
 //making function to ask questions
 const askqs = (i=0) => {
-    console.log(questions[i]);
+    process.stdout.write(questions[i]);
 }
 
 for(let j=0;j<questions.length;j++) {
@@ -32,6 +32,6 @@ for(let j=0;j<questions.length;j++) {
 
     //testing if this is the correct way to get the answers
     process.stdin.on("data", dada => {
-        console.log(`${dada.toString().trim()}`);
+        console.log(`${dada}`);
     });
 }
