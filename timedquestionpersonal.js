@@ -6,6 +6,7 @@
 
 //making the quesion set (start with 2 questions)
 const  qtime = 10000; //10 seconds
+let cans = 0; //correct answers
 
 //array which contain the questions
 const questions = [
@@ -24,14 +25,30 @@ let uanswers = [];
 
 //making function to ask questions
 const askqs = (i=0) => {
-    process.stdout.write(questions[i]);
+    process.stdout.write(`\n${questions[i]}  `);
 }
 
-for(let j=0;j<questions.length;j++) {
-    askqs(j);
+askqs();
 
-    //testing if this is the correct way to get the answers
-    process.stdin.on("data", dada => {
-        console.log(`${dada}`);
-    });
+//testing if this is the correct way to get the answers
+process.stdin.on("data", dada => {
+    uanswers.push(dada.toString().trim());
+    if(uanswers.length<questions.length) {
+        askqs(uanswers.length)
+    }
+    else {
+        correction();
+    }
+});
+
+const correction = () => {
+    for(j=0;j<answers.length;j++) {
+        if(answers[j]==uanswers[j]){
+            cans++;
+        }
+    }
+    console.log(`\nYou got ${cans}/${questions.length} correct\n`);
+    let mrkperc = Math.floor(cans/questions.length)*100;
+    console.log(`Congrats! You scored ${mrkperc}% marks`);
+    process.exit();
 }

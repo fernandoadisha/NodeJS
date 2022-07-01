@@ -37,7 +37,7 @@ process.stdin.on("data", doil => { //use the "stdin" to get data, "on" keyword t
         ask(answers.length);
     }
     else{
-        process.exit(); //exiting the process, exiting code which is still running because of on function
+        process.exit(); //exiting the process, exiting code which is still running because of "on" function
     }
 });
  process.on("exit", () =>{
