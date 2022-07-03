@@ -8,7 +8,7 @@ let currentTime = 0; // "const" is for constant variables and when using "let" i
 
 console.log(`setting a ${waitTime/1000} second wait timer`);
 
-const IncTime = () => {
+const IncTime = () => { 
     currentTime += waitInterval;
     let p = Math.floor((currentTime/waitTime)*100);
     process.stdout.clearLine(); //function use to clear the last line in the terminal
