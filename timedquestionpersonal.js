@@ -3,6 +3,8 @@
 
 //changing the question type for now, because mcq seems little harder, so will choosing direct answers and checking if they are right method
 
+//question ansking and answering is completed now have to add the timers
+
 
 //making the quesion set (start with 2 questions)
 const  qtime = 10000; //10 seconds
@@ -48,7 +50,17 @@ const correction = () => {
         }
     }
     console.log(`\nYou got ${cans}/${questions.length} correct\n`);
-    let mrkperc = Math.floor(cans/questions.length)*100;
-    console.log(`Congrats! You scored ${mrkperc}% marks`);
+
+    let mrkperc = cans/questions.length*100;
+    if(mrkperc!=0){
+        console.log(`Congrats! You scored ${mrkperc}% marks`);
+    }
+    else{
+        console.log(`Sorry! You scored ${mrkperc}% marks`);
+    }
     process.exit();
+}
+
+const inoneq = () => { //in one question
+    console.log("Your question is timed");
 }
