@@ -35,4 +35,3 @@ const timerFinished = () => {
 //setting this function to a varible so we can use it's return values which the current time(I guess because there's nothing we actually return)
 const interval = setInterval(IncTime, waitInterval); //function that set intervals means, this function call the given function in this casse "IncTime" over and over again after waiting the given time, just like the setTimeout function  this takes the needed funciton as the first parameter and waiting time as the second parameter 
 setTimeout(timerFinished, waitTime); //function which set the timer, in the first parameter we add the fucntion which need to run after the timer is ran out and second we will add the timer time
-
