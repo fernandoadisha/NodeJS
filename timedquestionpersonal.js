@@ -7,7 +7,6 @@
 
 
 //making the quesion set (start with 2 questions)
-const  qtime = 10000; //10 seconds
 let cans = 0; //correct answers
 
 //array which contain the questions
@@ -22,27 +21,7 @@ const answers = [
     "Elon Musk"
 ];
 
-//array to contain user's answers
-let uanswers = [];
-
-//making function to ask questions
-const askqs = (i=0) => {
-    process.stdout.write(`\n${questions[i]}  `);
-}
-
-askqs();
-
-//testing if this is the correct way to get the answers
-process.stdin.on("data", dada => {
-    uanswers.push(dada.toString().trim());
-    if(uanswers.length<questions.length) {
-        askqs(uanswers.length)
-    }
-    else {
-        correction();
-    }
-});
-
+//function of the correction
 const correction = () => {
     for(j=0;j<answers.length;j++) {
         if(answers[j]==uanswers[j]){
@@ -61,6 +40,52 @@ const correction = () => {
     process.exit();
 }
 
-const inoneq = () => { //in one question
-    console.log("Your question is timed");
+
+//timing section
+
+const  qtime = 10000; //10 seconds, question time
+const wtime = 20100; //20 seconds, whole time
+let curtime = 0; //current time
+
+//function to show how much time is left (not in the use for now)
+const showlefttime = () => {
+    //since in command line having only last line to interact I haave to pause live time showing for now
+    curtime += 1000;
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+    process.stdout.write(`You have ${curtime/1000} seconds left`);
 }
+
+//function that runs after running out of time
+const inoneq = () => { //in one question
+    console.log("Time ran out for this question");
+    uanswers.push("Time ran out");
+    askqs(uanswers.length);
+}
+
+//array to contain user's answers
+let uanswers = [];
+
+setInterval(correction, wtime);
+
+//making function to ask questions
+const askqs = (i=0) => {
+    process.stdout.write(`\n${questions[i]}  `);
+    const qtimefunc  = setTimeout(inoneq, qtime);
+}
+
+askqs();
+
+process.stdin.on("data", dada => {
+    uanswers.push(dada.toString().trim());
+    //clearTimeout(qtimefunc);
+    if(uanswers.length<questions.length) {
+        askqs(uanswers.length)
+    }
+    else {
+        correction();
+    }
+});
+
+
+
