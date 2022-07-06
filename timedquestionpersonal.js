@@ -12,13 +12,15 @@ let cans = 0; //correct answers
 //array which contain the questions
 const questions = [
     "What is the tallest bulding in the world?",
-    "Who is the CEO of SpaceX?"
+    "Who is the CEO of SpaceX?",
+    "What AWS stands for?"
 ];
 
 //array which contain the answers
 const answers = [
     "Burj Khalifa",
-    "Elon Musk"
+    "Elon Musk",
+    "Amazon Web Services"
 ];
 
 //function of the correction
@@ -44,8 +46,9 @@ const correction = () => {
 //timing section
 
 const  qtime = 10000; //10 seconds, question time
-const wtime = 20100; //20 seconds, whole time
+//const wtime = 20100; //20 seconds, whole time
 let curtime = 0; //current time
+let qtimefunc; //varible to hold the timeout
 
 //function to show how much time is left (not in the use for now)
 const showlefttime = () => {
@@ -66,19 +69,24 @@ const inoneq = () => { //in one question
 //array to contain user's answers
 let uanswers = [];
 
-setInterval(correction, wtime);
+//setInterval(correction, wtime); //for now setting interval is not being used because every question is given 10s and if there's no more questions then correction() function will run, ending the program
 
 //making function to ask questions
 const askqs = (i=0) => {
-    process.stdout.write(`\n${questions[i]}  `);
-    const qtimefunc  = setTimeout(inoneq, qtime);
+    if(questions[i]==undefined){
+        correction();
+    }
+    else{
+        process.stdout.write(`\n${questions[i]}  `);
+        qtimefunc  = setTimeout(inoneq, qtime);
+    } 
 }
 
 askqs();
 
 process.stdin.on("data", dada => {
     uanswers.push(dada.toString().trim());
-    //clearTimeout(qtimefunc);
+    clearTimeout(qtimefunc);
     if(uanswers.length<questions.length) {
         askqs(uanswers.length)
     }
